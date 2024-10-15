@@ -28,6 +28,9 @@
     <None Remove="Zoombox\Resources\ZoomRelative.cur" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="MessagePack" Version="2.5.172" />
+  </ItemGroup>
+  <ItemGroup>
     <Resource Include="Zoombox\Resources\Zoom.cur" />
     <Resource Include="Zoombox\Resources\ZoomRelative.cur" />
   </ItemGroup>
