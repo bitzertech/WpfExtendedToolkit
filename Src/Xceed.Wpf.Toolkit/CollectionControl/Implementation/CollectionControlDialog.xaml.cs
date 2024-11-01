@@ -27,8 +27,6 @@ using System.Security;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using Xceed.Wpf.Toolkit.PropertyGrid;
-using MessagePack;
-using MessagePack.Resolvers;
 
 namespace Xceed.Wpf.Toolkit
 {
@@ -201,17 +199,9 @@ namespace Xceed.Wpf.Toolkit
       object result = null;
       var sourceType = source.GetType();
 
-      if( source is Array )
+      if( source is Array array)
       {
-        using( var stream = new MemoryStream() )
-        {
-          var bytes = MessagePackSerializer.Serialize(source, ContractlessStandardResolver.Options);
-
-          stream.Write(bytes, 0, bytes.Length);
-          stream.Seek( 0, SeekOrigin.Begin );
-
-          result = MessagePackSerializer.Deserialize<Array>(bytes, ContractlessStandardResolver.Options);
-        }
+        result = array.Clone();
       }
       // For IDictionary, we need to create EditableKeyValuePair to edit the Key-Value.
       else if( ( this.ItemsSource is IDictionary )
